@@ -1,6 +1,5 @@
 application_name               = "DevOps1-pm1"
 environment                    = "dev"
-location                       = "Canada central"
 admin_username                 = "kalu"
 admin_password                 = "Supreme007!"
 mysql_admin_username           = "mysqladmin"
