@@ -9,7 +9,6 @@ resource "azurerm_network_interface" "frontend_nic" {
   name                = "${var.application_name}-${var.environment}-frontend-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
-
   ip_configuration {
     name                          = "internal"
     subnet_id                     = var.vnet_subnet_id
@@ -29,7 +28,6 @@ resource "azurerm_network_interface" "backend_nic" {
   name                = "${var.application_name}-${var.environment}-backend-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
-
   ip_configuration {
     name                          = "internal"
     subnet_id                     = var.vnet_subnet_id
@@ -55,7 +53,7 @@ resource "azurerm_linux_virtual_machine" "frontend_vm" {
 
   admin_ssh_key {
     username   = var.admin_username
-    public_key = file("${path.module}/id_rsa.pub")
+    public_key = var.ssh_public_key
   }
 
   source_image_reference {
@@ -85,7 +83,7 @@ resource "azurerm_linux_virtual_machine" "backend_vm" {
 
   admin_ssh_key {
     username   = var.admin_username
-    public_key = file("${path.module}/id_rsa.pub")
+    public_key = var.ssh_public_key
   }
 
   source_image_reference {
