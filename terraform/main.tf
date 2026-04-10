@@ -1,12 +1,11 @@
-resource "azurerm_resource_group" "rg" {
-  name     = "${var.application_name}-${var.environment}-rg"
-  location = var.location
+data "azurerm_resource_group" "rg" {
+  name = "kalu_RG"
 }
 
 module "network" {
   source                         = "./modules/network"
-  resource_group_name            = azurerm_resource_group.rg.name
-  location                       = var.location
+  resource_group_name            = data.azurerm_resource_group.rg.name
+  location                       = data.azurerm_resource_group.rg.location
   application_name               = var.application_name
   environment                    = var.environment
   vnet_address_space             = var.vnet_address_space
@@ -15,8 +14,8 @@ module "network" {
 
 module "compute" {
   source              = "./modules/compute"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = var.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   vnet_subnet_id      = module.network.public_subnet_id
@@ -28,8 +27,8 @@ module "compute" {
 
 module "database" {
   source               = "./modules/database"
-  resource_group_name  = azurerm_resource_group.rg.name
-  location             = var.location
+  resource_group_name  = data.azurerm_resource_group.rg.name
+  location             = data.azurerm_resource_group.rg.location
   mysql_admin_username = var.mysql_admin_username
   mysql_admin_password = var.mysql_admin_password
   mysql_database_name  = var.mysql_database_name
