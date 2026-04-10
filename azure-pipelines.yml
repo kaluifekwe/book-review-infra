@@ -7,7 +7,7 @@ trigger:
       - terraform/**
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'book-review-agent'
 
 stages:
 - stage: Terraform
