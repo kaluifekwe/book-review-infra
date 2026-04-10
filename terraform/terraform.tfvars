@@ -12,6 +12,6 @@ admin_username = "azureuser"
 admin_password = "YourSecureVMPassword123!"
 
 # Database Configuration
-mysql_admin_username = "mysqladmin"
-mysql_admin_password = "YourSecureMySQLPassword123!"
+mysql_admin_username = "kalu"
+mysql_admin_password = "Supreme007@2026"
 mysql_database_name  = "bookreviews_dev"
